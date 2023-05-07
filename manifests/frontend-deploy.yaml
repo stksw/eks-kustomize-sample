@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: 074355429783.dkr.ecr.ap-northeast-1.amazonaws.com/eks-sample-202305-frontend:1.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: APP_NAME
+              value: eks-handson-202305
+            - name: ON_EKS
+              value: 'true'
